@@ -8,6 +8,7 @@
 
 #import "DetailStickerViewController.h"
 #import "DetailStickerCell.h"
+#import "SDWebImage/UIImageView+WebCache.h"
 
 @interface DetailStickerViewController ()<UICollectionViewDataSource, UICollectionViewDelegate>
 
@@ -29,35 +30,84 @@
 }
 
 - (void) customNavigation {
+    //---------------------------------------------------------
     //set first title
     self.navigationItem.title = _dictData[@"title"];
     [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont fontWithName:@"ChalkboardSE-Bold" size:23], NSFontAttributeName, nil]];
     
+    //---------------------------------------------------------
     //change back button icon
-//    UIButton *backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    UIImage *backBtnImage = [UIImage imageNamed:@"back.png"]  ;
-//    [backBtn setBackgroundImage:backBtnImage forState:UIControlStateNormal];
-//    [backBtn addTarget:self action:@selector(btnBackClicked) forControlEvents:UIControlEventTouchUpInside];
-//    backBtn.frame = CGRectMake(0, 0, 25, 25);
-//    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithCustomView:backBtn] ;
-//    self.navigationItem.leftBarButtonItem = backButton;
+    self.navigationController.navigationBar.backIndicatorImage = [UIImage imageNamed:@"back"];
+    self.navigationController.navigationBar.backIndicatorTransitionMaskImage = [UIImage imageNamed:@"back"];
+    
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    
     UIButton *btnMore = [UIButton buttonWithType:UIButtonTypeCustom];
-    UIImage *backBtnImage = [UIImage imageNamed:@"more1.png"]  ;
+    UIImage *backBtnImage = [UIImage imageNamed:@"more"]  ;
     [btnMore setBackgroundImage:backBtnImage forState:UIControlStateNormal];
     [btnMore addTarget:self action:@selector(btnMoreTouchUpInside) forControlEvents:UIControlEventTouchUpInside];
     btnMore.frame = CGRectMake(0, 0, 25, 25);
     UIBarButtonItem *buttonMore = [[UIBarButtonItem alloc] initWithCustomView:btnMore] ;
     self.navigationItem.rightBarButtonItem = buttonMore;
+    
 }
-
+//---------------------------------------------------------
+//More button to connect AppStore
 - (void) btnMoreTouchUpInside {
-    UIActionSheet * actionSheet = [[UIActionSheet alloc] initWithTitle:@"Total Stickers" delegate:self cancelButtonTitle:@"cancel" destructiveButtonTitle:nil otherButtonTitles:@"More Apps", @"Rate App", @"Gift App", @"Recommend App", nil];
-    [actionSheet showInView : self.view];
+    UIAlertController* alert = [UIAlertController
+                                alertControllerWithTitle:@"Total Stickers"
+                                message:nil
+                                preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    UIAlertAction* btnCancel = [UIAlertAction
+                                actionWithTitle:@"Cancel"
+                                style:UIAlertActionStyleCancel
+                                handler:^(UIAlertAction * action)
+                                {
+                                    //UIAlertController will automatically dismiss the view
+                                }];
+    
+    UIAlertAction* btnMoreApp = [UIAlertAction
+                                 actionWithTitle:@"More Apps"
+                                 style:UIAlertActionStyleDefault
+                                 handler:^(UIAlertAction * action)
+                                 {
+                                     //Go to AppStore
+                                 }];
+    
+    UIAlertAction* btnRateApp = [UIAlertAction
+                                 actionWithTitle:@"Rate App"
+                                 style:UIAlertActionStyleDefault
+                                 handler:^(UIAlertAction * action)
+                                 {
+                                     //Go to AppStore
+                                 }];
+    UIAlertAction* btnGiftApp = [UIAlertAction
+                                 actionWithTitle:@"Gift App"
+                                 style:UIAlertActionStyleDefault
+                                 handler:^(UIAlertAction * action)
+                                 {
+                                     //Go to AppStore
+                                 }];
+    UIAlertAction* btnRecommendApp = [UIAlertAction
+                                      actionWithTitle:@"Recommend App"
+                                      style:UIAlertActionStyleDefault
+                                      handler:^(UIAlertAction * action)
+                                      {
+                                          //Go to AppStore
+                                      }];
+    [alert addAction:btnCancel];
+    [alert addAction:btnMoreApp];
+    [alert addAction:btnRateApp];
+    [alert addAction:btnGiftApp];
+    [alert addAction:btnRecommendApp];
+    alert.view.tintColor = [UIColor redColor];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
-- (void) btnBackClicked {
+- (void) btnBackClicked:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
-    //[self.revealViewController revealToggleAnimated:YES];
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
@@ -75,26 +125,12 @@
     NSArray *array = _dictData[@"link2"];
     NSDictionary *dictionary = [array objectAtIndex:indexPath.row];
     cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell1" forIndexPath:indexPath];
-    //NSLog(@"%@", array);
-    //self.navigationItem.title = _dictData[@"title"];
     
+    //---------------------------------------------------------
+    //set image using SDWebImage
     NSString *url = dictionary[@"link21"];
-    
-    //UIImageView *imgDetailSticker = [cell.contentView viewWithTag:101];
-    //cell.imgView = [cell.contentView viewWithTag:101];
     NSURL *imgUrl = [NSURL URLWithString:url];
-    NSURLRequest *request = [NSURLRequest requestWithURL:imgUrl];
-    //NSData *data = [NSData dataWithContentsOfURL:imgUrl];
-    //[imgDetailSticker setImage:[UIImage imageWithData:data]];
-    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse * _Nullable response, NSData * _Nullable data, NSError * _Nullable connectionError) {
-        if (!connectionError) {
-            
-            //[imgDetailSticker setImage:[UIImage imageWithData:data]];
-            cell.imgView.image = [UIImage imageWithData:data];
-            
-        }
-    }];
-    //[cell addSubview:imgDetailSticker];
+    [cell.imgView sd_setImageWithURL:imgUrl placeholderImage:nil];
     
     [cell addSubview:cell.imgView];
     return cell;
@@ -103,17 +139,15 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     _stickerInfoVC = [storyboard instantiateViewControllerWithIdentifier:@"StickerInfo"];
-     NSDictionary *dictDetailData = [_dictData[@"link2"] objectAtIndex:indexPath.row];
+    NSDictionary *dictDetailData = [_dictData[@"link2"] objectAtIndex:indexPath.row];
     _stickerInfoVC.dictDetailData = dictDetailData;
-    //[self.view addSubview:_stickerInfoVC.view];
     UIView* myView = _stickerInfoVC.view;
     UIWindow* currentWindow = [UIApplication sharedApplication].keyWindow;
     [currentWindow addSubview:myView];
-    //[self presentViewController:_stickerInfoVC animated:NO completion:^{}];
 }
 
 #pragma mark - Setup collection view cell
-
+//---------------------------------------------------------
 // Layout: Set cell size
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -121,27 +155,27 @@
     return cellSize;
 }
 
+//---------------------------------------------------------
 // Spacing for cell
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
     return 12;
 }
 
+//---------------------------------------------------------
 // Spacing for line
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
     return 15;
 }
 
 /*
-#pragma mark - Navigation
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
-- (IBAction)btnBackClicked:(id)sender {
-    [self.navigationController popToRootViewControllerAnimated:YES];
-}
 @end

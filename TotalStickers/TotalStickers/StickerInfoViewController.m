@@ -7,6 +7,7 @@
 //
 
 #import "StickerInfoViewController.h"
+#import "SDWebImage/UIImageView+WebCache.h"
 #import <MessageUI/MessageUI.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
@@ -40,12 +41,7 @@
     for (NSDictionary *dictionary in array) {
         NSString *url = dictionary[@"link3"];
         NSURL *imgUrl = [NSURL URLWithString:url];
-        NSURLRequest *request = [NSURLRequest requestWithURL:imgUrl];
-        [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse * _Nullable response, NSData * _Nullable data, NSError * _Nullable connectionError) {
-            if (!connectionError) {
-                _imgStickerInfo.image = [UIImage imageWithData:data];
-            }
-        }];
+        [_imgStickerInfo sd_setImageWithURL:imgUrl placeholderImage:nil];
     }
     _imgStickerInfo.frame = CGRectMake(0.f, 0.f, 170.0f, 170.0f);
     _imgStickerInfo.center = CGPointMake(_background.frame.size.width / 2, _background.frame.size.height / 2 - 40.0f);

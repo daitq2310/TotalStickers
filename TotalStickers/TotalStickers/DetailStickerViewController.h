@@ -10,6 +10,8 @@
 #import "StickerInfoViewController.h"
 
 @interface DetailStickerViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate>
+
+
 @property NSDictionary *dictData;
 @property (weak, nonatomic) IBOutlet UICollectionView *detailStickerCollectionView;
 @property StickerInfoViewController *stickerInfoVC;
