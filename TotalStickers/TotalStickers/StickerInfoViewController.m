@@ -26,6 +26,7 @@
     [self closeButton];
     [self sendToMessengerButton];
     [self stickerInfoImage];
+    [self displayStickerInfo];
 }
 
 - (void) backgroundStickerInfo {
@@ -47,6 +48,23 @@
     _imgStickerInfo.contentMode = UIViewContentModeScaleAspectFill;
     _imgStickerInfo.layer.masksToBounds = YES;
 }
+
+- (void) displayStickerInfo {
+    [UIView animateWithDuration:0.4f delay:0.f options:UIViewAnimationOptionCurveLinear animations:^{
+        _background.frame = CGRectMake(_background.frame.origin.x, _background.frame.origin.y - _background.frame.size.height/2 - self.view.frame.size.height/2, _background.frame.size.width, _background.frame.size.height);
+    } completion:^(BOOL finished) {
+        
+    }];
+}
+
+- (void) dismissStickerInfo {
+    [UIView animateWithDuration:0.4f delay:0.f options:UIViewAnimationOptionCurveLinear animations:^{
+        _background.frame = CGRectMake(_background.frame.origin.x, _background.frame.origin.y + _background.frame.size.height/2 + self.view.frame.size.height/2, _background.frame.size.width, _background.frame.size.height);
+    } completion:^(BOOL finished) {
+        [self.view removeFromSuperview];
+    }];
+}
+
 - (void) closeButton {
     [_btnClose setTitle:@"X" forState:UIControlStateNormal];
 }
@@ -65,15 +83,13 @@
 
 
 - (IBAction)btnCloseClicked:(id)sender {
-    [self.view removeFromSuperview];
+    [self dismissStickerInfo];
 }
 - (IBAction)btnSendToMessengerClicked:(id)sender {
     [FBSDKMessengerSharer shareImage:_imgStickerInfo.image withOptions:nil];
 }
 
 - (IBAction)btnBackTouchUpInside:(id)sender {
-    [self.view removeFromSuperview];
-    //[self dismissViewControllerAnimated:NO completion:^{}];
-    
+    [self dismissStickerInfo];
 }
 @end
