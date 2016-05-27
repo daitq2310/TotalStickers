@@ -30,8 +30,7 @@
 
 - (void) backgroundStickerInfo {
     self.view.backgroundColor = [UIColor colorWithRed:100.0f / 255.0f green:100.0f / 255.0f blue:100.0f / 255.0f alpha:0.8f];
-    _background.layer.cornerRadius = 20.0f;
-    _background.layer.borderWidth = 3.0f;
+    _background.layer.cornerRadius = 7.0f;
     _background.layer.borderColor = [UIColor lightGrayColor].CGColor;
     self.navigationController.view.alpha = 0.8;
 }
@@ -49,45 +48,14 @@
     _imgStickerInfo.layer.masksToBounds = YES;
 }
 - (void) closeButton {
-    CAGradientLayer *gradientLayer = [CAGradientLayer layer];
-    gradientLayer.frame = _btnClose.layer.bounds;
     [_btnClose setTitle:@"X" forState:UIControlStateNormal];
-    [_btnClose setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    _btnClose.layer.cornerRadius = _btnClose.frame.size.width / 2;
-    _btnClose.layer.borderWidth = 3.0f;
-    _btnClose.layer.borderColor = [UIColor lightGrayColor].CGColor;
-    gradientLayer.colors = [NSArray arrayWithObjects:
-                            (id)[UIColor colorWithWhite:1.0f alpha:0.1f].CGColor,
-                            (id)[UIColor colorWithWhite:0.4f alpha:0.5f].CGColor,
-                            nil];
-    
-    gradientLayer.locations = [NSArray arrayWithObjects:
-                               [NSNumber numberWithFloat:0.0f],
-                               [NSNumber numberWithFloat:1.0f],
-                               nil];
-    
-    gradientLayer.cornerRadius = _btnClose.layer.cornerRadius;
-    [_btnClose.layer addSublayer:gradientLayer];
 }
 
 - (void) sendToMessengerButton {
-    CAGradientLayer *gradientLayer = [CAGradientLayer layer];
-    gradientLayer.frame = _btnSendToMessenger.layer.bounds;
     [_btnSendToMessenger setTitle:@"Send To Messenger" forState:UIControlStateNormal];
     [_btnSendToMessenger setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    _btnSendToMessenger.layer.cornerRadius = 10.0f;
-    gradientLayer.colors = [NSArray arrayWithObjects:
-                            (id)[UIColor colorWithWhite:1.0f alpha:0.1f].CGColor,
-                            (id)[UIColor colorWithWhite:0.4f alpha:0.5f].CGColor,
-                            nil];
+    _btnSendToMessenger.layer.cornerRadius = 7.0f;
     
-    gradientLayer.locations = [NSArray arrayWithObjects:
-                               [NSNumber numberWithFloat:0.0f],
-                               [NSNumber numberWithFloat:1.0f],
-                               nil];
-    
-    gradientLayer.cornerRadius = _btnSendToMessenger.layer.cornerRadius;
-    [_btnSendToMessenger.layer addSublayer:gradientLayer];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -95,15 +63,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
 
 - (IBAction)btnCloseClicked:(id)sender {
     [self.view removeFromSuperview];

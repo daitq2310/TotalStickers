@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "StickerInfoViewController.h"
+#import "ActionSheetViewController.h"
 
 @interface DetailStickerViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate>
 
@@ -15,5 +16,6 @@
 @property NSDictionary *dictData;
 @property (weak, nonatomic) IBOutlet UICollectionView *detailStickerCollectionView;
 @property StickerInfoViewController *stickerInfoVC;
+@property ActionSheetViewController *actionSheetVC;
 
 @end

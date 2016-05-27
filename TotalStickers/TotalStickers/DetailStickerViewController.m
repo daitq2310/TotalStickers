@@ -9,6 +9,7 @@
 #import "DetailStickerViewController.h"
 #import "DetailStickerCell.h"
 #import "SDWebImage/UIImageView+WebCache.h"
+#import "UIImageView+UIActivityIndicatorForSDWebImage.h"
 
 @interface DetailStickerViewController ()<UICollectionViewDataSource, UICollectionViewDelegate>
 
@@ -55,56 +56,11 @@
 //---------------------------------------------------------
 //More button to connect AppStore
 - (void) btnMoreTouchUpInside {
-    UIAlertController* alert = [UIAlertController
-                                alertControllerWithTitle:@"Total Stickers"
-                                message:nil
-                                preferredStyle:UIAlertControllerStyleActionSheet];
-    
-    UIAlertAction* btnCancel = [UIAlertAction
-                                actionWithTitle:@"Cancel"
-                                style:UIAlertActionStyleCancel
-                                handler:^(UIAlertAction * action)
-                                {
-                                    //UIAlertController will automatically dismiss the view
-                                }];
-    
-    UIAlertAction* btnMoreApp = [UIAlertAction
-                                 actionWithTitle:@"More Apps"
-                                 style:UIAlertActionStyleDefault
-                                 handler:^(UIAlertAction * action)
-                                 {
-                                     //Go to AppStore
-                                 }];
-    
-    UIAlertAction* btnRateApp = [UIAlertAction
-                                 actionWithTitle:@"Rate App"
-                                 style:UIAlertActionStyleDefault
-                                 handler:^(UIAlertAction * action)
-                                 {
-                                     //Go to AppStore
-                                 }];
-    UIAlertAction* btnGiftApp = [UIAlertAction
-                                 actionWithTitle:@"Gift App"
-                                 style:UIAlertActionStyleDefault
-                                 handler:^(UIAlertAction * action)
-                                 {
-                                     //Go to AppStore
-                                 }];
-    UIAlertAction* btnRecommendApp = [UIAlertAction
-                                      actionWithTitle:@"Recommend App"
-                                      style:UIAlertActionStyleDefault
-                                      handler:^(UIAlertAction * action)
-                                      {
-                                          //Go to AppStore
-                                      }];
-    [alert addAction:btnCancel];
-    [alert addAction:btnMoreApp];
-    [alert addAction:btnRateApp];
-    [alert addAction:btnGiftApp];
-    [alert addAction:btnRecommendApp];
-    alert.view.tintColor = [UIColor redColor];
-    [self presentViewController:alert animated:YES completion:nil];
-}
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    _actionSheetVC = [storyboard instantiateViewControllerWithIdentifier:@"Action"];
+    UIView* myView = _actionSheetVC.view;
+    UIWindow* currentWindow = [UIApplication sharedApplication].keyWindow;
+    [currentWindow addSubview:myView];}
 
 - (void) btnBackClicked:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
@@ -130,8 +86,11 @@
     //set image using SDWebImage
     NSString *url = dictionary[@"link21"];
     NSURL *imgUrl = [NSURL URLWithString:url];
-    [cell.imgView sd_setImageWithURL:imgUrl placeholderImage:nil];
-    
+    UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    activityIndicator.center = cell.imgView.center;
+    activityIndicator.hidesWhenStopped = YES;
+    //[cell.imgView sd_setImageWithURL:imgUrl placeholderImage:nil];
+    [cell.imgView setImageWithURL:imgUrl usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     [cell addSubview:cell.imgView];
     return cell;
 }

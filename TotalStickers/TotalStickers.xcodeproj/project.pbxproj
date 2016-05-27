@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3229A0391CF8A454007BC226 /* copy1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3229A0371CF8A454007BC226 /* copy1.png */; };
+		3229A03A1CF8A454007BC226 /* download1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3229A0381CF8A454007BC226 /* download1.png */; };
+		3229A03E1CF8A94B007BC226 /* ActionSheetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3229A03D1CF8A94B007BC226 /* ActionSheetViewController.m */; };
+		3229A0401CF8ACF3007BC226 /* Test1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3229A03F1CF8ACF3007BC226 /* Test1.png */; };
+		3229A0431CF8B163007BC226 /* UIImageView+UIActivityIndicatorForSDWebImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 3229A0421CF8B163007BC226 /* UIImageView+UIActivityIndicatorForSDWebImage.m */; };
 		324744A81CC29AB10060FF7C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 324744A71CC29AB10060FF7C /* main.m */; };
 		324744AB1CC29AB10060FF7C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 324744AA1CC29AB10060FF7C /* AppDelegate.m */; };
 		324744AE1CC29AB10060FF7C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 324744AD1CC29AB10060FF7C /* ViewController.m */; };
@@ -47,6 +52,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3229A0371CF8A454007BC226 /* copy1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = copy1.png; sourceTree = "<group>"; };
+		3229A0381CF8A454007BC226 /* download1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = download1.png; sourceTree = "<group>"; };
+		3229A03C1CF8A94B007BC226 /* ActionSheetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetViewController.h; sourceTree = "<group>"; };
+		3229A03D1CF8A94B007BC226 /* ActionSheetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionSheetViewController.m; sourceTree = "<group>"; };
+		3229A03F1CF8ACF3007BC226 /* Test1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Test1.png; sourceTree = "<group>"; };
+		3229A0411CF8B163007BC226 /* UIImageView+UIActivityIndicatorForSDWebImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+UIActivityIndicatorForSDWebImage.h"; sourceTree = "<group>"; };
+		3229A0421CF8B163007BC226 /* UIImageView+UIActivityIndicatorForSDWebImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+UIActivityIndicatorForSDWebImage.m"; sourceTree = "<group>"; };
 		324744A31CC29AB10060FF7C /* TotalStickers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TotalStickers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		324744A71CC29AB10060FF7C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		324744A91CC29AB10060FF7C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -126,6 +138,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3229A03B1CF8A92F007BC226 /* CustomActionSheet */ = {
+			isa = PBXGroup;
+			children = (
+				3229A03C1CF8A94B007BC226 /* ActionSheetViewController.h */,
+				3229A03D1CF8A94B007BC226 /* ActionSheetViewController.m */,
+			);
+			name = CustomActionSheet;
+			sourceTree = "<group>";
+		};
 		3247449A1CC29AB00060FF7C = {
 			isa = PBXGroup;
 			children = (
@@ -145,6 +166,7 @@
 		324744A51CC29AB10060FF7C /* TotalStickers */ = {
 			isa = PBXGroup;
 			children = (
+				3229A03B1CF8A92F007BC226 /* CustomActionSheet */,
 				32FA0C0D1CD2635100B6AE7F /* List Sticker */,
 				32730ED51CC611E0000303B9 /* Detail Sticker */,
 				32F272451CD045D200A71AD2 /* Sticker Info */,
@@ -215,6 +237,8 @@
 		32F4B1061CF619D00047C411 /* SDWebImage */ = {
 			isa = PBXGroup;
 			children = (
+				3229A0411CF8B163007BC226 /* UIImageView+UIActivityIndicatorForSDWebImage.h */,
+				3229A0421CF8B163007BC226 /* UIImageView+UIActivityIndicatorForSDWebImage.m */,
 				32F4B1071CF619D00047C411 /* SDWebImageManager.h */,
 				32F4B1081CF619D00047C411 /* MKAnnotationView+WebCache.h */,
 				32F4B1091CF619D00047C411 /* MKAnnotationView+WebCache.m */,
@@ -266,6 +290,9 @@
 		32FA0C1C1CD276D200B6AE7F /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				3229A03F1CF8ACF3007BC226 /* Test1.png */,
+				3229A0371CF8A454007BC226 /* copy1.png */,
+				3229A0381CF8A454007BC226 /* download1.png */,
 				32F4B1021CF617E60047C411 /* back.png */,
 				32FD562B1CE8E6110083956E /* more.png */,
 				32FA0C1A1CD2742500B6AE7F /* StickerAppIcon.png */,
@@ -332,10 +359,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3229A0391CF8A454007BC226 /* copy1.png in Resources */,
 				32FA0C191CD271A500B6AE7F /* folder2.png in Resources */,
 				32730ED11CC60A39000303B9 /* link.txt in Resources */,
 				32FD562C1CE8E6110083956E /* more.png in Resources */,
 				324744B61CC29AB10060FF7C /* LaunchScreen.storyboard in Resources */,
+				3229A03A1CF8A454007BC226 /* download1.png in Resources */,
+				3229A0401CF8ACF3007BC226 /* Test1.png in Resources */,
 				32F4B1031CF617E60047C411 /* back.png in Resources */,
 				327A4CA41CE3CE7E00363E8C /* Main.storyboard in Resources */,
 				32FA0C1B1CD2742500B6AE7F /* StickerAppIcon.png in Resources */,
@@ -350,6 +380,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3229A03E1CF8A94B007BC226 /* ActionSheetViewController.m in Sources */,
 				32F4B1351CF619D10047C411 /* UIImageView+HighlightedWebCache.m in Sources */,
 				32F4B12C1CF619D10047C411 /* SDWebImageDecoder.m in Sources */,
 				32F4B1361CF619D10047C411 /* UIImageView+WebCache.m in Sources */,
@@ -362,6 +393,7 @@
 				32F4B1281CF619D10047C411 /* MKAnnotationView+WebCache.m in Sources */,
 				32F4B12B1CF619D10047C411 /* SDWebImageCompat.m in Sources */,
 				32F4B1301CF619D10047C411 /* SDWebImagePrefetcher.m in Sources */,
+				3229A0431CF8B163007BC226 /* UIImageView+UIActivityIndicatorForSDWebImage.m in Sources */,
 				32F4B1371CF619D10047C411 /* UIView+WebCacheOperation.m in Sources */,
 				32F4B1331CF619D10047C411 /* UIImage+MultiFormat.m in Sources */,
 				32FA0C131CD2646300B6AE7F /* ListStickerCell.m in Sources */,
@@ -497,6 +529,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = daitq.TotalStickers;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -516,6 +549,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = daitq.TotalStickers;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

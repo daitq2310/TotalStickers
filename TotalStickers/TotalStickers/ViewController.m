@@ -10,6 +10,7 @@
 #import "DetailStickerViewController.h"
 #import "ListStickerCell.h"
 #import "SDWebImage/UIImageView+WebCache.h"
+#import "UIImageView+UIActivityIndicatorForSDWebImage.h"
 
 @interface ViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
 
@@ -90,7 +91,8 @@
     //set image using SDWebImage
     NSString *url = dictData[@"link1"];
     NSURL *imgUrl = [NSURL URLWithString:url];
-    [cell.imgMainSticker sd_setImageWithURL:imgUrl placeholderImage:nil];
+    //[cell.imgMainSticker sd_setImageWithURL:imgUrl placeholderImage:nil];
+    [cell.imgMainSticker setImageWithURL:imgUrl usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     cell.numberOfStickerInEachMainSticker.text = [NSString stringWithFormat:@"%ld", [dictData[@"link2"] count]];
     cell.imgNumberFolder.image = [UIImage imageNamed:@"folder2"];
     [cell addSubview:imgView];
@@ -99,54 +101,11 @@
 }
 
 - (void) btnMoreTouchUpInside : (id) sender {
-    UIAlertController* alert = [UIAlertController
-                                alertControllerWithTitle:@"Total Stickers"
-                                message:nil
-                                preferredStyle:UIAlertControllerStyleActionSheet];
-    
-    UIAlertAction* btnCancel = [UIAlertAction
-                              actionWithTitle:@"Cancel"
-                              style:UIAlertActionStyleCancel
-                              handler:^(UIAlertAction * action)
-                              {
-                                  //UIAlertController will automatically dismiss the view
-                              }];
-    
-    UIAlertAction* btnMoreApp = [UIAlertAction
-                              actionWithTitle:@"More Apps"
-                              style:UIAlertActionStyleDefault
-                              handler:^(UIAlertAction * action)
-                              {
-                                  //Go to AppStore
-                              }];
-    
-    UIAlertAction* btnRateApp = [UIAlertAction
-                              actionWithTitle:@"Rate App"
-                              style:UIAlertActionStyleDefault
-                              handler:^(UIAlertAction * action)
-                              {
-                                  //Go to AppStore
-                              }];
-    UIAlertAction* btnGiftApp = [UIAlertAction
-                              actionWithTitle:@"Gift App"
-                              style:UIAlertActionStyleDefault
-                              handler:^(UIAlertAction * action)
-                              {
-                                  //Go to AppStore
-                              }];
-    UIAlertAction* btnRecommendApp = [UIAlertAction
-                              actionWithTitle:@"Recommend App"
-                              style:UIAlertActionStyleDefault
-                              handler:^(UIAlertAction * action)
-                              {
-                                  //Go to AppStore
-                              }];
-    [alert addAction:btnCancel];
-    [alert addAction:btnMoreApp];
-    [alert addAction:btnRateApp];
-    [alert addAction:btnGiftApp];
-    [alert addAction:btnRecommendApp];
-    [self presentViewController:alert animated:YES completion:nil];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    _actionSheetVC = [storyboard instantiateViewControllerWithIdentifier:@"Action"];
+    UIView* myView = _actionSheetVC.view;
+    UIWindow* currentWindow = [UIApplication sharedApplication].keyWindow;
+    [currentWindow addSubview:myView];
 }
 
 #pragma mark - Select item

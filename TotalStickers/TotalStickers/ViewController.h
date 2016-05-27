@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ActionSheetViewController.h"
 
 @interface ViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate>
 @property (weak, nonatomic) IBOutlet UICollectionView *stickerCollectionView;
 @property NSArray *jsonLinkArray;
+@property ActionSheetViewController *actionSheetVC;
 
 @end
 
